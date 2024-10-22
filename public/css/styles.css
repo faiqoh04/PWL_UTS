@@ -1,0 +1,98 @@
+/* public/css/styles.css */
+
+body {
+    font-family: 'Poppins', sans-serif; /* Menggunakan font Poppins */
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to bottom right, #f8f9fa, #e9ecef); /* Gradien lembut */
+    color: #333;
+}
+
+header {
+    background: #ffffff; /* Warna latar belakang header */
+    padding: 20px 30px; /* Padding yang lebih besar */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Tambahkan bayangan */
+}
+
+.logo h1 {
+    font-size: 24px; /* Ukuran font yang lebih besar untuk logo */
+    margin: 0;
+    color: #007bff; /* Warna untuk logo */
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 30px; /* Jarak yang lebih besar antar item menu */
+}
+
+nav a {
+    text-decoration: none;
+    color: #007bff; /* Warna link */
+    font-weight: bold; /* Membuat link lebih menonjol */
+    transition: color 0.3s; /* Efek transisi saat hover */
+}
+
+nav a:hover {
+    color: #0056b3; /* Warna saat hover */
+}
+
+.container {
+    padding: 40px; /* Padding yang lebih besar untuk konten */
+    max-width: 1200px; /* Membatasi lebar konten */
+    margin: 0 auto; /* Mengatur margin agar konten berada di tengah */
+}
+
+/* Tambahan untuk scroll-container */
+.scroll-container {
+    display: flex; /* Mengatur tata letak sebagai flexbox */
+    overflow-x: auto; /* Membuat konten dapat digulir secara horizontal */
+    padding: 20px 0; /* Ruang atas dan bawah */
+    scroll-snap-type: x mandatory; /* Mengaktifkan snap saat menggulir */
+    gap: 20px; /* Jarak antar kotak */
+}
+
+/* Gaya untuk kotak */
+.box {
+    flex: 0 0 300px; /* Lebar tetap untuk setiap kotak */
+    padding: 20px; /* Ruang di dalam kotak */
+    background-color: #ffffff; /* Warna latar belakang kotak */
+    border-radius: 10px; /* Sudut membulat */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Bayangan yang lebih halus */
+    scroll-snap-align: start; /* Mengatur titik snap */
+    transition: transform 0.3s, box-shadow 0.3s; /* Transisi untuk efek angkat */
+}
+
+/* Efek hover pada kotak */
+.box:hover {
+    transform: translateY(-5px); /* Efek angkat saat hover */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2); /* Menambah bayangan saat hover */
+}
+
+/* Judul di dalam kotak */
+.box h2 {
+    color: #007bff; /* Warna judul */
+    margin-bottom: 10px; /* Jarak bawah judul */
+}
+
+/* Teks di dalam kotak */
+.box p {
+    color: #555555; /* Warna teks */
+    line-height: 1.6; /* Jarak antar baris */
+}
+
+footer {
+    text-align: center;
+    padding: 20px 0;
+    background: #ffffff; /* Warna latar belakang footer */
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Tambahkan bayangan */
+    margin-top: 40px; /* Jarak di atas footer */
+}
+
+footer p {
+    margin: 0; /* Menghapus margin default */
+    color: #777; /* Warna teks footer */
+}
