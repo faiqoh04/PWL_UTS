@@ -239,6 +239,12 @@ class KategoriController extends Controller
         }
     }
 
+    public function show_ajax(string $id){
+        $kategori = KategoriModel::find($id);
+
+        return view('kategori.show_ajax', ['kategori' => $kategori]);
+    }
+    
     //JS 8 TUGAS 1-3
     public function import()
     {

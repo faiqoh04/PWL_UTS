@@ -1,98 +1,244 @@
-/* public/css/styles.css */
-
 body {
-    font-family: 'Poppins', sans-serif; /* Menggunakan font Poppins */
+    font-family: 'Poppins', sans-serif; 
     margin: 0;
     padding: 0;
-    background: linear-gradient(to bottom right, #f8f9fa, #e9ecef); /* Gradien lembut */
+    background: linear-gradient(to bottom right, #f8f9fa, #e9ecef); 
     color: #333;
 }
 
 header {
-    background: #ffffff; /* Warna latar belakang header */
-    padding: 20px 30px; /* Padding yang lebih besar */
+    background: #ffffff; 
+    padding: 20px 30px; 
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Tambahkan bayangan */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
 }
 
 .logo h1 {
-    font-size: 24px; /* Ukuran font yang lebih besar untuk logo */
+    font-size: 28px; 
     margin: 0;
-    color: #007bff; /* Warna untuk logo */
+    color: #007bff; 
 }
 
 nav ul {
     list-style: none;
     display: flex;
-    gap: 30px; /* Jarak yang lebih besar antar item menu */
+    gap: 30px; 
 }
 
 nav a {
     text-decoration: none;
-    color: #007bff; /* Warna link */
-    font-weight: bold; /* Membuat link lebih menonjol */
-    transition: color 0.3s; /* Efek transisi saat hover */
+    color: #007bff; 
+    font-weight: bold; 
+    transition: color 0.3s; 
 }
 
 nav a:hover {
-    color: #0056b3; /* Warna saat hover */
+    color: #0056b3; 
 }
 
 .container {
-    padding: 40px; /* Padding yang lebih besar untuk konten */
-    max-width: 1200px; /* Membatasi lebar konten */
-    margin: 0 auto; /* Mengatur margin agar konten berada di tengah */
+    padding: 40px; 
+    max-width: 1200px; 
+    margin: 0 auto; 
 }
 
-/* Tambahan untuk scroll-container */
-.scroll-container {
-    display: flex; /* Mengatur tata letak sebagai flexbox */
-    overflow-x: auto; /* Membuat konten dapat digulir secara horizontal */
-    padding: 20px 0; /* Ruang atas dan bawah */
-    scroll-snap-type: x mandatory; /* Mengaktifkan snap saat menggulir */
-    gap: 20px; /* Jarak antar kotak */
-}
-
-/* Gaya untuk kotak */
-.box {
-    flex: 0 0 300px; /* Lebar tetap untuk setiap kotak */
-    padding: 20px; /* Ruang di dalam kotak */
-    background-color: #ffffff; /* Warna latar belakang kotak */
-    border-radius: 10px; /* Sudut membulat */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Bayangan yang lebih halus */
-    scroll-snap-align: start; /* Mengatur titik snap */
-    transition: transform 0.3s, box-shadow 0.3s; /* Transisi untuk efek angkat */
-}
-
-/* Efek hover pada kotak */
-.box:hover {
-    transform: translateY(-5px); /* Efek angkat saat hover */
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2); /* Menambah bayangan saat hover */
-}
-
-/* Judul di dalam kotak */
-.box h2 {
-    color: #007bff; /* Warna judul */
-    margin-bottom: 10px; /* Jarak bawah judul */
-}
-
-/* Teks di dalam kotak */
-.box p {
-    color: #555555; /* Warna teks */
-    line-height: 1.6; /* Jarak antar baris */
-}
-
-footer {
+/* Bagian Intro */
+.intro {
     text-align: center;
-    padding: 20px 0;
-    background: #ffffff; /* Warna latar belakang footer */
-    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Tambahkan bayangan */
-    margin-top: 40px; /* Jarak di atas footer */
+    margin-bottom: 40px;
 }
 
-footer p {
-    margin: 0; /* Menghapus margin default */
-    color: #777; /* Warna teks footer */
+.intro h1 {
+    font-size: 36px; 
+    margin-bottom: 20px; 
+}
+
+.intro p {
+    font-size: 18px; 
+    margin-bottom: 20px; 
+}
+
+/* Gaya Tombol yang Seragam */
+.cta-button {
+    background-color: #007bff; 
+    color: #ffffff; 
+    padding: 10px 20px; 
+    border: none; 
+    border-radius: 5px; 
+    font-size: 16px; 
+    text-decoration: none; 
+    transition: background-color 0.3s; 
+    height: 40px; /* Atur tinggi tetap */
+    display: inline-flex; /* Flexbox untuk penataan */
+    justify-content: center; 
+    align-items: center; 
+}
+
+/* Pastikan efek hover tombol */
+.cta-button:hover {
+    background-color: #0056b3; 
+}
+
+/* Kontainer Scroll */
+.scroll-container {
+    display: flex; 
+    overflow-x: auto; 
+    padding: 20px 0; 
+    scroll-snap-type: x mandatory; 
+    gap: 20px; 
+}
+
+/* Gaya Box */
+.box {
+    flex: 0 0 300px; 
+    padding: 20px; 
+    background-color: #ffffff; 
+    border-radius: 10px; 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); 
+    scroll-snap-align: start; 
+    transition: transform 0.3s, box-shadow 0.3s; 
+    position: relative;
+}
+
+/* Efek Hover untuk Box */
+.box:hover {
+    transform: translateY(-5px); /* Menggerakkan box sedikit ke atas */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Meningkatkan bayangan saat hover */
+}
+
+.box img {
+    width: 100%; 
+    height: 200px; 
+    object-fit: cover; 
+    border-radius: 10px; 
+}
+
+.box h2 {
+    color: #007bff; 
+    margin: 10px 0; 
+}
+
+.box p {
+    color: #555555; 
+    line-height: 1.6; 
+}
+
+/* Menyesuaikan Posisi Tombol dalam Box */
+.box .cta-button {
+    margin-top: 10px; /* Tambahkan ruang di atas tombol */
+    position: static; /* Reset posisi */
+}
+
+/* Kontainer Grid Produk */
+.grid-scroll-container {
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); 
+    gap: 20px; 
+}
+
+.grid-item {
+    background-color: #ffffff; 
+    border-radius: 10px; 
+    padding: 15px; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+    transition: transform 0.3s, box-shadow 0.3s; 
+    display: flex; /* Menggunakan flexbox untuk menyelaraskan item */
+    flex-direction: column; /* Menumpuk item secara vertikal */
+    justify-content: space-between; /* Memisahkan item */
+    height: 100%; /* Tinggi penuh untuk menjaga jarak item */
+}
+
+.grid-item:hover {
+    transform: translateY(-5px); 
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2); 
+}
+
+.grid-item img {
+    width: 100%; 
+    height: 150px; 
+    object-fit: cover; 
+    border-radius: 10px; 
+}
+
+.grid-item h3 {
+    font-size: 20px; 
+    color: #007bff; 
+    margin: 10px 0; 
+}
+
+.grid-item p {
+    color: #555555; 
+    line-height: 1.5; 
+}
+
+/* Tombol dalam Item Grid */
+.grid-item .cta-button {
+    margin-top: 10px; /* Tambahkan ruang di atas tombol */
+    align-self: stretch; /* Pastikan tombol memenuhi lebar */
+}
+
+/* Footer */
+footer {
+    background: #f8f9fa; 
+    padding: 40px 20px; 
+    text-align: left; 
+}
+
+.footer-container {
+    display: flex; 
+    justify-content: space-between; 
+    max-width: 1200px; 
+    margin: 0 auto; 
+}
+
+.footer-section {
+    flex: 1; 
+    margin: 0 20px; 
+}
+
+.footer-section h3 {
+    color: #007bff; 
+    margin-bottom: 15px; 
+}
+
+.footer-section p, 
+.footer-section ul {
+    color: #555555; 
+}
+
+.footer-section ul {
+    list-style: none; 
+    padding: 0; 
+}
+
+.footer-section ul li {
+    margin-bottom: 10px; 
+}
+
+.footer-section ul li a {
+    color: #007bff; 
+    text-decoration: none; 
+    transition: color 0.3s; 
+}
+
+.footer-section ul li a:hover {
+    color: #0056b3; 
+}
+
+.social-icons {
+    display: flex; 
+    gap: 15px; 
+}
+
+.social-icons img {
+    width: 24px; 
+    height: 24px; 
+}
+
+.footer-bottom {
+    text-align: center; 
+    margin-top: 20px; 
+    color: #777; 
 }

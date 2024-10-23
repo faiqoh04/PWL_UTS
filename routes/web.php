@@ -10,39 +10,41 @@ use App\Http\Controllers\StokController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\LandingController;
+use App\Http\Controllers\ProfileController;
 
 
 use Illuminate\Support\Facades\Route;
 
-//UTS
 
 // Rute untuk halaman landing
 Route::get('/landing', [LandingController::class, 'index'])->name('landing.index');
 
-// Rute untuk halaman about
-Route::get('/about', function () {
-    return view('landing.about');
-})->name('about');
+// Rute untuk halaman statis
+Route::get('/about', [LandingController::class, 'about'])->name('about');
+Route::get('/menu', [LandingController::class, 'menu'])->name('menu');
+Route::get('/review', [LandingController::class, 'review'])->name('review');
+Route::get('/contact', [LandingController::class, 'contact'])->name('contact');
 
-// Rute untuk halaman menu
-Route::get('/menu', function () {
-    return view('landing.menu');
-})->name('menu');
+//Rute untuk profile
+    // Route::middleware(['authorize:ADM,MNG,STF,PLG'])->group(function(){
+    //     Route::get('/profile', [ProfileController::class, 'index']);
+    //     Route::get('/profile/{id}/edit_ajax', [ProfileController::class, 'edit_ajax']);
+    //     Route::put('/profile/{id}/update_ajax', [ProfileController::class, 'update_ajax']);
+    //     Route::put('/profile/{id}/update_foto', [ProfileController::class, 'update_foto']);
+    // });
 
-// Rute untuk halaman review
-Route::get('/review', function () {
-    return view('landing.review');
-})->name('review');
-
-// Rute untuk halaman contact
-Route::get('/contact', function () {
-    return view('landing.contact');
-})->name('contact');
-
+    Route::middleware(['auth'])->group(function(){
+    Route::get('/', [WelcomeController::class, 'index']);
+    Route::get('/profile', [UserController::class, 'profile'])->name('profile');
+    Route::post('/profile_ajax', [UserController::class, 'profile_ajax']);
+    Route::get('/profile/change-photo', [UserController::class, 'showChangePhotoForm']);
+    Route::post('/profile/update-photo', [UserController::class, 'updatePhoto']);
+    Route::get('/profile/manage', [UserController::class, 'showManageProfileForm']);
+    Route::post('/profile/update', [UserController::class, 'updateProfile']);
+    });
 
 // Mendefinisikan pola untuk parameter id
 Route::pattern('id', '[0-9]+');
-
 
 // Route untuk halaman login
 Route::get('login', [AuthController::class, 'login'])->name('login');
@@ -56,6 +58,9 @@ Route::post('/signup', [AuthController::class, 'store']);
 // Route yang memerlukan autentikasi
 Route::middleware(['auth'])->group(function () {
     Route::get('/', [WelcomeController::class, 'index']);
+    // Route::get('/profile', [ProfileController::class, 'index']);
+    // Route::post('upload_foto', [ProfileController::class, 'upload_foto'])->name('upload.foto');
+    
 
     // Route untuk manajemen user
     Route::group(['prefix' => 'user', 'middleware' => 'authorize:ADM'], function () { 
@@ -75,6 +80,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/import_ajax', [UserController::class, 'import_ajax']); //ajax import excel
         Route::get('/export_excel', [UserController::class, 'export_excel']); // export excel
         Route::get('/export_pdf', [UserController::class, 'export_pdf']); // export pdf
+        Route::get('/{id}/show_ajax', [UserController::class, 'show_ajax']);
 
         Route::get('/{id}', [UserController::class, 'show']);
         Route::get('/{id}/edit', [UserController::class, 'edit']);
@@ -100,6 +106,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/import_ajax', [LevelController::class, 'import_ajax']);  //ajax import excel
         Route::get('/export_excel', [LevelController::class, 'export_excel']); // export excel
         Route::get('/export_pdf', [LevelController::class, 'export_pdf']); // export pdf
+        Route::get('/{id}/show_ajax', [LevelController::class, 'show_ajax']);
 
         Route::get('/{id}', [LevelController::class, 'show']);
         Route::get('/level/{id}', [LevelController::class, 'show'])->name('level.show');
@@ -126,6 +133,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/import_ajax', [KategoriController::class, 'import_ajax']);  //ajax import excel
         Route::get('/export_excel', [KategoriController::class, 'export_excel']); // export excel
         Route::get('/export_pdf', [KategoriController::class, 'export_pdf']); // export pdf
+        Route::get('/{id}/show_ajax', [KategoriController::class, 'show_ajax']);
 
         Route::get('/{id}', [KategoriController::class, 'show']);
         Route::get('/{id}/edit', [KategoriController::class, 'edit']);
@@ -151,6 +159,8 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/import_ajax', [BarangController::class, 'import_ajax']);  //ajax import excel
         Route::get('/export_excel', [BarangController::class, 'export_excel']); // export excel
         Route::get('/export_pdf', [BarangController::class, 'export_pdf']); // export pdf
+        Route::get('/{id}/show_ajax', [BarangController::class, 'show_ajax']);
+        
 
         Route::get('/{id}', [BarangController::class, 'show']);
         Route::get('/{id}/edit', [BarangController::class, 'edit']);
@@ -176,6 +186,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/import_ajax', [SupplierController::class, 'import_ajax']);  //ajax import excel
         Route::get('/export_excel', [SupplierController::class, 'export_excel']); // export excel
         Route::get('/export_pdf', [SupplierController::class, 'export_pdf']); // export pdf
+        Route::get('/{id}/show_ajax', [SupplierController::class, 'show_ajax']);
 
         Route::get('/{id}', [SupplierController::class, 'show']);
         Route::get('/{id}/edit', [SupplierController::class, 'edit']);
@@ -200,6 +211,8 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/import_ajax', [StokController::class, 'import_ajax']);  //ajax import excel
         Route::get('/export_excel', [StokController::class, 'export_excel']); // export excel
         Route::get('/export_pdf', [StokController::class, 'export_pdf']); // export pdf
+        Route::get('/{id}/show_ajax', [StokController::class, 'show_ajax']);
+
         
         Route::get('/{id}', [StokController::class, 'show']);       //menampilkan detail Stok
         Route::get('/{id}/edit', [StokController::class, 'edit']);  //menampilkan halaman form detail Stok
@@ -224,6 +237,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/import_ajax', [PenjualanController::class, 'import_ajax']);  //ajax import excel
         Route::get('/export_excel', [PenjualanController::class, 'export_excel']); // export excel
         Route::get('/export_pdf', [PenjualanController::class, 'export_pdf']); // export pdf
+        Route::get('/{id}/show_ajax', [PenjualanController::class, 'show_ajax']);
         
         Route::get('/{id}', [PenjualanController::class, 'show']);       //menampilkan detail Penjualan
         Route::get('/{id}/edit', [PenjualanController::class, 'edit']);  //menampilkan halaman form detail Penjualan

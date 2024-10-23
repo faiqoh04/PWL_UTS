@@ -8,6 +8,34 @@
 
     <!-- Sidebar -->
     <div class="sidebar">
+        <!-- User Profile -->
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+                <img @if (file_exists(public_path(
+                            'storage/uploads/profile_pictures/' .
+                                auth()->user()->username .
+                                '/' . 
+                                auth()->user()->username .
+                                '_profile.png'))) src="{{ asset('storage/uploads/profile_pictures/' . auth()->user()->username . '/' . auth()->user()->username . '_profile.png') }}" @endif
+                    @if (file_exists(public_path(
+                                'storage/uploads/profile_pictures/' .
+                                    auth()->user()->username .
+                                    '/' . 
+                                    auth()->user()->username .
+                                    '_profile.jpg'))) src="{{ asset('storage/uploads/profile_pictures/' . auth()->user()->username . '/' . auth()->user()->username . '_profile.jpg') }}" @endif
+                    @if (file_exists(public_path(
+                                'storage/uploads/profile_pictures/' .
+                                    auth()->user()->username .
+                                    '/' . 
+                                    auth()->user()->username .
+                                    '_profile.jpeg'))) src="{{ asset('storage/uploads/profile_pictures/' . auth()->user()->username . '/' . auth()->user()->username . '_profile.jpeg') }}" @endif
+                    class="img-circle elevation-2" alt="User Image">
+            </div>
+            <div class="info">
+                <a href="{{ url('/profile') }}" class="d-block">{{ auth()->user()->username }}</a>
+            </div>
+        </div>
+
         <!-- SidebarSearch Form -->
         <div class="form-inline mt-2">
             <div class="input-group" data-widget="sidebar-search">
@@ -20,6 +48,7 @@
                 </div>
             </div>
         </div>
+
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"

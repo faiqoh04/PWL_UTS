@@ -312,6 +312,12 @@ class UserController extends Controller
         return redirect('/');
     }
 
+    public function show_ajax(string $id){
+        $user = UserModel::find($id);
+
+        return view('user.show_ajax', ['user' => $user]);
+    }
+
     // Menampilkan halaman untuk mengimport data user dari file Excel
     public function import()
     {
@@ -471,5 +477,80 @@ class UserController extends Controller
 
         // Render file PDF dan tampilkan
         return $pdf->stream('Data User ' . date('Y-m-d H:i:s') . '.pdf');
+    }
+
+    public function profile()
+    {
+        $breadcrumb = (object) [
+            'title' => 'Profil Anda',
+            'list'  => ['Home', 'Profile']
+        ];
+        $activeMenu = 'profile';
+        return view('profile.index', ['breadcrumb' => $breadcrumb, 'activeMenu' => $activeMenu]);
+    }
+    public function showChangePhotoForm()
+    {
+        return view('profil.change_photo');
+    }
+    public function showManageProfileForm()
+    {
+        return view('profil.manage');
+    }
+    public function updatePhoto(Request $request)
+    {
+        if ($request->ajax() || $request->wantsJson()) {
+            $rules = [
+                'file_pfp' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            ];
+            $validator = Validator::make($request->all(), $rules);
+            if ($validator->fails()) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Validasi Gagal',
+                    'msgField' => $validator->errors(),
+                ]);
+            }
+            $file = $request->file('file_pfp');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $path = public_path('images/pfp');
+            $file->move($path, $filename);
+            $user = UserModel::findOrFail(auth()->user()->user_id);
+            $user->profile_picture = $filename;
+            $user->save();
+            return response()->json([
+                'status' => true,
+                'message' => 'Foto profil berhasil diupload',
+                'newProfilePicturePath' => asset('images/pfp/' . $filename),
+            ]);
+        }
+    }
+    public function updateProfile(Request $request)
+    {
+        if ($request->ajax() || $request->wantsJson()) {
+            $rules = [
+                'username' => 'required|string|max:50|unique:m_user,username,' . auth()->user()->user_id . ',user_id',
+                'nama' => 'required|string|max:100',
+                'password' => 'nullable|string|min:6',
+            ];
+            $validator = Validator::make($request->all(), $rules);
+            if ($validator->fails()) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Validasi Gagal',
+                    'msgField' => $validator->errors(),
+                ]);
+            }
+            $user = UserModel::findOrFail(auth()->user()->user_id);
+            $user->username = $request->username;
+            $user->nama = $request->nama;
+            if ($request->password) {
+                $user->password = bcrypt($request->password);
+            }
+            $user->save();
+            return response()->json([
+                'status' => true,
+                'message' => 'Profil berhasil diperbarui',
+            ]);
+        }
     }
 }

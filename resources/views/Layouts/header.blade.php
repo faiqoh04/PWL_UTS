@@ -131,5 +131,18 @@
           <i class="fas fa-th-large"></i>
         </a>
       </li>
+      <li class="nav-item dropdown">
+          <a class="nav-link" data-toggle="dropdown" href="#">
+              <img src="{{ asset('images/pfp/' . auth()->user()->profile_picture) }}" 
+                  class="img-circle" 
+                  alt="User Image" 
+                  style="width: 40px; height: 40px; object-fit: cover;">
+          </a>
+          <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+              <a href="{{ url('/profile') }}" class="dropdown-item">
+                  <i class="fas fa-user mr-2"></i> Profil Anda
+              </a>
+          </div>
+      </li>
     </ul>
   </nav>
